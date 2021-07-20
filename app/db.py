@@ -1,10 +1,8 @@
-from dataclasses import dataclass, field
 import sqlalchemy
 from sqlalchemy import Table, Integer, Column, String
 from sqlalchemy.orm import registry, sessionmaker
-import hashlib
-
-from .config import settings
+from app.models import ShortenUrl
+from app.config import settings
 
 mapper_registry = registry()
 
@@ -15,16 +13,6 @@ shorten_url_table = Table(
     Column('origin_url', String()),
     Column('generated_url', String(32)),
 )
-
-@dataclass
-class ShortenUrl:
-    id: int = field(init=False)
-    origin_url: str
-    generated_url: str = field(init=False)
-
-    def __post_init__(self):
-        self.generated_url = hashlib.md5(self.origin_url.encode()).hexdigest()
-
 
 mapper_registry.map_imperatively(ShortenUrl, shorten_url_table)
 

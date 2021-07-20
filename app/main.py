@@ -1,6 +1,6 @@
 from typing import List
 from fastapi import FastAPI
-from .schemas import CreateShortenUrlPayload, ShortenUrlResponse
+from app.schemas import CreateShortenUrlPayload, ShortenUrlResponse
 import app.handlers as handlers
 
 app = FastAPI(title="Shorten url service")

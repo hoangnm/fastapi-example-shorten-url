@@ -1,4 +1,5 @@
-from app.db import ShortenUrl, SessionLocal
+from app.db import SessionLocal
+from app.models import ShortenUrl
 
 def get_shorten_urls():
     db = SessionLocal()

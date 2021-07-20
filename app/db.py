@@ -11,7 +11,7 @@ shorten_url_table = Table(
     mapper_registry.metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('origin_url', String()),
-    Column('generated_url', String(32)),
+    Column('generated_url', String(32), unique=True),
 )
 
 mapper_registry.map_imperatively(ShortenUrl, shorten_url_table)

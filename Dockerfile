@@ -1,5 +1,7 @@
 FROM python:3.9.4-slim
 
+RUN apt-get update && apt-get install -y netcat
+
 WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -10,3 +12,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+CMD ["./prestart.sh"]

@@ -1,9 +1,5 @@
-echo "Waiting for postgres connection"
+#!/bin/bash
+while !</dev/tcp/db/5432; do sleep 1; done;
+alembic upgrade head
 
-while ! nc -z db 5432; do
-    sleep 0.1
-done
-
-echo "PostgreSQL started"
-
-exec "$@"
+uvicorn app.main:app --host 0.0.0.0 --reload

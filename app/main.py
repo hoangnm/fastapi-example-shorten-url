@@ -1,15 +1,6 @@
-from typing import List
-from fastapi import FastAPI, status
-from app.schemas import CreateShortenUrlPayload, ShortenUrlResponse
-import app.handlers as handlers
+from fastapi import FastAPI
+from app.routers import shorten_urls
 
 app = FastAPI(title="Shorten url service")
 
-@app.get("/shorten_urls", response_model=List[ShortenUrlResponse])
-def get_shorten_urls():
-    return handlers.get_shorten_urls()
-
-@app.post("/shorten_urls", response_model=ShortenUrlResponse, status_code=status.HTTP_201_CREATED)
-def create_shorten_url(payload: CreateShortenUrlPayload):
-    url = handlers.create_shorten_url(payload)
-    return url
+app.include_router(shorten_urls.router)
